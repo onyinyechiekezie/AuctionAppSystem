@@ -1,4 +1,8 @@
 package org.Auction.data.enums;
 
-public class UserRole {
+public enum UserRole {
+
+    ADMIN,
+    SELLER,
+    BIDDER,
 }
