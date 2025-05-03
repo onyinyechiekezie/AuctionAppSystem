@@ -16,24 +16,17 @@ public class Auction {
 
     @Id
     private String id;
-    @NotBlank
-    @Size(min = 5, max = 100)
-    private String title;
-    @NotBlank
-    @Size(min = 10, max = 1000)
+    private String itemName;
     private String description;
-    @Positive
     private double startingPrice;
     @PositiveOrZero
     private double currentHighestBid;
-    @DBRef
-    private User seller;
-    @Future
+//    @DBRef
+//    private User seller;
     private LocalDateTime startTime;
-    @Future
     private LocalDateTime endTime;
     private boolean isEnded;
-    //private String sellerId;
-    private boolean isActive;
+    private String sellerId;
+    private boolean active;
     private List<Bid> bids;
 }

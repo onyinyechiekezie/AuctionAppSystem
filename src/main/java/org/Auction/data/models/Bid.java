@@ -17,7 +17,7 @@ public class Bid {
     @Positive
     private double amount;
     @DBRef
-    private User bidder;
+    private String bidderId;
 
     private LocalDateTime bidTime = LocalDateTime.now();
     private String auctionId;
