@@ -11,6 +11,7 @@ public class BidMapper {
         }
         Bid bid = new Bid();
 //        bid.setId(bidRequest.getId());
+        bid.setAuctonId(bidRequest.getAuctionId());
         bid.setAmount(bidRequest.getAmount());
         bid.setBidTime(bidRequest.getBidTime());
         return bid;

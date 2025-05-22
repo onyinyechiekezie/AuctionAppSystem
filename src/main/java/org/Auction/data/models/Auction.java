@@ -3,6 +3,7 @@ package org.Auction.data.models;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.Auction.data.enums.AuctionStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -27,6 +28,7 @@ public class Auction {
     private LocalDateTime endTime;
     private boolean isEnded;
     private String sellerId;
-    private boolean active;
+    private AuctionStatus status;
     private List<Bid> bids;
+
 }

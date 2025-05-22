@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface BidRepository extends MongoRepository<Bid, String> {
     List<Bid> findByAuctionId(String auctionId);
+    boolean existsByAuctionId(String auctionId);
 }

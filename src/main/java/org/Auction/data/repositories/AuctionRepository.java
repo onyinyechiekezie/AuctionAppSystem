@@ -10,6 +10,8 @@ import java.util.List;
 public interface AuctionRepository extends MongoRepository<Auction, String> {
     List<Auction> findBySellerId(String sellerId);
     List<Auction> findByActiveTrue();
-    li
+    Auction findAuctionsById(String auctionId);
+
+    List<Auction> findByWinnerId(String bidderId);
 }
 
