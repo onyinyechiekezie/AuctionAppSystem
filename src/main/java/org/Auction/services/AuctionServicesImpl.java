@@ -1,6 +1,7 @@
 package org.Auction.services;
 
 import lombok.RequiredArgsConstructor;
+import org.Auction.data.enums.AuctionStatus;
 import org.Auction.data.models.Auction;
 import org.Auction.data.repositories.AuctionRepository;
 import org.Auction.data.repositories.BidRepository;
@@ -95,15 +96,17 @@ public class AuctionServicesImpl implements AuctionServices {
 
     @Override
     public List<AuctionResponse> getActiveAuctions() {
-        List<Auction> activeAuctions = auctionRepository.findByActiveTrue();
+        List<Auction> activeAuctions = auctionRepository.findByStatus(AuctionStatus.ACTIVE);
         List<AuctionResponse> auctionResponses = new ArrayList<>();
 
         for (Auction auction : activeAuctions) {
             AuctionResponse response = auctionMapper.toDTO(auction);
             auctionResponses.add(response);
         }
+
         return auctionResponses;
     }
+
 
     @Override
     public List<AuctionResponse> getAuctionsWon(String bidderId) {

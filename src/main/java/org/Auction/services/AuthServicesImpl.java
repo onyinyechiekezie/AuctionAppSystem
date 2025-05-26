@@ -1,6 +1,7 @@
 package org.Auction.services;
 
 import lombok.RequiredArgsConstructor;
+import org.Auction.data.enums.UserRole;
 import org.Auction.data.models.User;
 import org.Auction.data.repositories.UserRepository;
 import org.Auction.dto.request.user.LoginUserRequest;
@@ -9,13 +10,12 @@ import org.Auction.exceptions.EmailAlreadyExistsException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.Auction.mappers.UserMapper;
 
 import static org.Auction.mappers.UserMapper.mapToUser;
 
 @Service
 @RequiredArgsConstructor
-public class UserServicesImpl implements UserServices {
+public class AuthServicesImpl implements AuthServices {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -28,6 +28,10 @@ public class UserServicesImpl implements UserServices {
         if (userRepository.findByEmail(request.getEmail()) != null) {
             throw new EmailAlreadyExistsException("A user with this email already exists");
         }
+        if (request.getRole() == UserRole.ADMIN) {
+            throw new IllegalArgumentException("Cannot register as ADMIN");
+        }
+
         User user = mapToUser(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         return userRepository.save(user);

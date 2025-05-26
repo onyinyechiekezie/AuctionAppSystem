@@ -26,8 +26,9 @@ public class Auction {
 //    private User seller;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private boolean isEnded;
+//    private boolean isEnded;
     private String sellerId;
+    private String winnerId;
     private AuctionStatus status;
     private List<Bid> bids;
 
