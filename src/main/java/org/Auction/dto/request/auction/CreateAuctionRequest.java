@@ -10,9 +10,9 @@ import org.springframework.data.annotation.Id;
 import java.time.LocalDateTime;
 
 @Data
-public class AuctionRequest {
-    @Id
-    private String id;
+public class CreateAuctionRequest {
+//    @Id
+//    private String id;
 
     @NotBlank(message = "Item name is required")
     @Size(min = 5, max = 100)
@@ -30,4 +30,5 @@ public class AuctionRequest {
     private LocalDateTime endTime;
     @NotBlank(message = "Username is required")
     private String sellerUsername;
+//    private String sellerId;
 }

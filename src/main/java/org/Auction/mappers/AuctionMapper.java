@@ -2,21 +2,21 @@ package org.Auction.mappers;
 
 import org.Auction.data.enums.AuctionStatus;
 import org.Auction.data.models.Auction;
-import org.Auction.dto.request.auction.AuctionRequest;
-import org.Auction.dto.response.auction.AuctionResponse;
+import org.Auction.dto.request.auction.CreateAuctionRequest;
+import org.Auction.dto.response.auction.CreateAuctionResponse;
 import org.Auction.exceptions.InvalidAuctionRequestException;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AuctionMapper {
 
-    public Auction mapToAuction(AuctionRequest auctionRequest) {
+    public Auction mapToAuction(CreateAuctionRequest auctionRequest) {
         if (auctionRequest == null) {
             throw new InvalidAuctionRequestException("Invalid Auction Request");
         }
 
         Auction auction = new Auction();
-        auction.setId(auctionRequest.getId());
+//        auction.setId(auctionRequest.getId());
         auction.setItemName(auctionRequest.getItemName());
         auction.setDescription(auctionRequest.getDescription());
         auction.setStartingPrice(auctionRequest.getStartingPrice());
@@ -27,12 +27,12 @@ public class AuctionMapper {
         return auction;
     }
 
-    public AuctionResponse toDTO(Auction auction) {
+    public CreateAuctionResponse toDTO(Auction auction) {
         if (auction == null) {
             return null;
         }
 
-        AuctionResponse response = new AuctionResponse();
+        CreateAuctionResponse response = new CreateAuctionResponse();
         response.setId(auction.getId());
         response.setItemName(auction.getItemName());
         response.setDescription(auction.getDescription());

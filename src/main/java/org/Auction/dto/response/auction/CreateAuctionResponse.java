@@ -6,7 +6,7 @@ import org.Auction.data.enums.AuctionStatus;
 import java.time.LocalDateTime;
 
 @Data
-public class AuctionResponse {
+public class CreateAuctionResponse {
 
     private String id;
     private String itemName;

@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
 
-    private final AuthServices userServices;
+    private final AuthServices authServices;
 
     @PermitAll
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody @Valid RegisterUserRequest request) {
         try {
-            userServices.registerUser(request);
+            authServices.registerUser(request);
             return ResponseEntity.ok("User registered successfully");
         }catch (Exception exception){
             return ResponseEntity.badRequest().body(exception.getMessage());
@@ -35,7 +35,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<String> loginUser(@RequestBody @Valid LoginUserRequest loginRequest) {
         try{
-            User user = userServices.loginUser(loginRequest);
+            User user = authServices.loginUser(loginRequest);
             return ResponseEntity.ok("Login successful. Role: " + user.getRole());
         } catch (Exception exception) {
             return ResponseEntity.badRequest().body(exception.getMessage());

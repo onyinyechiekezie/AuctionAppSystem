@@ -6,8 +6,8 @@ import org.Auction.data.models.Auction;
 import org.Auction.data.repositories.AuctionRepository;
 import org.Auction.data.repositories.BidRepository;
 import org.Auction.data.repositories.UserRepository;
-import org.Auction.dto.request.auction.AuctionRequest;
-import org.Auction.dto.response.auction.AuctionResponse;
+import org.Auction.dto.request.auction.CreateAuctionRequest;
+import org.Auction.dto.response.auction.CreateAuctionResponse;
 import org.Auction.exceptions.AuctionNotFoundException;
 import org.Auction.exceptions.UnauthorizedException;
 import org.Auction.mappers.AuctionMapper;
@@ -28,7 +28,7 @@ public class AuctionServicesImpl implements AuctionServices {
     private final UserRepository userRepository;
     //private final AuctionValidator auctionValidator;
     @Override
-    public Auction createAuction(AuctionRequest auctionRequest, String sellerId) {
+    public Auction createAuction(CreateAuctionRequest auctionRequest, String sellerId) {
         //auctionValidator.validate(auctionDTO);
         Auction auction = auctionMapper.mapToAuction(auctionRequest);
         auction.setSellerId(sellerId);
@@ -78,7 +78,7 @@ public class AuctionServicesImpl implements AuctionServices {
 //    }
 
     @Override
-    public List<AuctionResponse> getAuctionsBySeller(String sellerId) {
+    public List<CreateAuctionResponse> getAuctionsBySeller(String sellerId) {
         if (sellerId == null || sellerId.trim().isEmpty()) {
             throw new IllegalArgumentException("Seller ID cannot be empty");
         }
@@ -86,21 +86,21 @@ public class AuctionServicesImpl implements AuctionServices {
             throw new IllegalArgumentException("Seller not found with ID: " + sellerId);
         }
         List<Auction> auctions = auctionRepository.findBySellerId(sellerId);
-        List<AuctionResponse> auctionResponses = new ArrayList<>();
+        List<CreateAuctionResponse> auctionResponses = new ArrayList<>();
         for (Auction auction : auctions) {
-            AuctionResponse response = auctionMapper.toDTO(auction);
+            CreateAuctionResponse response = auctionMapper.toDTO(auction);
             auctionResponses.add(response);
         }
         return auctionResponses;
     }
 
     @Override
-    public List<AuctionResponse> getActiveAuctions() {
+    public List<CreateAuctionResponse> getActiveAuctions() {
         List<Auction> activeAuctions = auctionRepository.findByStatus(AuctionStatus.ACTIVE);
-        List<AuctionResponse> auctionResponses = new ArrayList<>();
+        List<CreateAuctionResponse> auctionResponses = new ArrayList<>();
 
         for (Auction auction : activeAuctions) {
-            AuctionResponse response = auctionMapper.toDTO(auction);
+            CreateAuctionResponse response = auctionMapper.toDTO(auction);
             auctionResponses.add(response);
         }
 
@@ -109,14 +109,14 @@ public class AuctionServicesImpl implements AuctionServices {
 
 
     @Override
-    public List<AuctionResponse> getAuctionsWon(String bidderId) {
+    public List<CreateAuctionResponse> getAuctionsWon(String bidderId) {
         if (bidderId == null || bidderId.trim().isEmpty()) {
             throw new IllegalArgumentException("Bidder ID cannot be null or empty");
         }
         List<Auction> wonAuctions = auctionRepository.findByWinnerId(bidderId);
-        List<AuctionResponse> auctionResponses = new ArrayList<>();
+        List<CreateAuctionResponse> auctionResponses = new ArrayList<>();
         for (Auction auction : wonAuctions) {
-            AuctionResponse response = auctionMapper.toDTO(auction);
+            CreateAuctionResponse response = auctionMapper.toDTO(auction);
             auctionResponses.add(response);
         }
         return auctionResponses;

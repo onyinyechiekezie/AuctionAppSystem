@@ -1,14 +1,14 @@
 package org.Auction.services;
 
 import org.Auction.data.models.Auction;
-import org.Auction.dto.request.auction.AuctionRequest;
-import org.Auction.dto.response.auction.AuctionResponse;
+import org.Auction.dto.request.auction.CreateAuctionRequest;
+import org.Auction.dto.response.auction.CreateAuctionResponse;
 
 import java.util.List;
 
 public interface AuctionServices {
 
-    Auction createAuction(AuctionRequest request, String userId);
+    Auction createAuction(CreateAuctionRequest request, String userId);
     void removeAuction(Auction auctionId, String sellerId);
 
     //    @Override
@@ -17,10 +17,10 @@ public interface AuctionServices {
     //                .map(auctionMapper::toDTO)
     //                .collect(Collectors.toList());
     //    }
-    List<AuctionResponse> getActiveAuctions();
+    List<CreateAuctionResponse> getActiveAuctions();
 
-    List<AuctionResponse> getAuctionsBySeller(String sellerId);
+    List<CreateAuctionResponse> getAuctionsBySeller(String sellerId);
 
-    List<AuctionResponse> getAuctionsWon(String bidderId);
+    List<CreateAuctionResponse> getAuctionsWon(String bidderId);
 //    List<AuctionResponse> getActiveAuctions();
 }
